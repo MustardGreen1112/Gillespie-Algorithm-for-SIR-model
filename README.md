@@ -8,7 +8,7 @@ Nowadays the algorithm has been used to simulate increasingly complex systems. T
 Also, some modifications of the algorithm are included, like $\tau$-leaping, hybrid Gillespie and Barabasi-Albert model (used in graph network). 
 
 ## SIR model introduction and simulation process using traditional Gillespie algorithm
-<img src="SIR.jpg" alt="SIR">
+<img src="SIR.png" alt="SIR">
 
 SIR model is a description of a disease spreading in a finite population. 
 Suppose for every individual in the population, the probability of this individual turning to another state at any time is equal to some constant value. This means the distribution of transition with respect to time is an exponential distribution. (Can proved from geometry distribution by taking infinite small time step). 
@@ -77,7 +77,7 @@ $$\Delta t = \frac{-ln(1 - u)}{\lambda _t}$$
 
 and sample an event using 
 
-$$\frac{\sum_{i = 1} ^ {r - 1} \lambda_i}{\sum_{i = 1} ^ {n} \lambda_i} < u < \frac{\sum_{i = 1} ^ {r - 1} \lambda_i}{\sum_{i = 1} ^ {n} \lambda_i}$$
+$$\frac{\sum_{i = 1} ^ {r - 1} \lambda_i}{\sum_{i = 1} ^ {n} \lambda_i} < u <= \frac{\sum_{i = 1} ^ {r} \lambda_i}{\sum_{i = 1} ^ {n} \lambda_i}$$
 
 then pick up the rth individual and update its state change: 
 
