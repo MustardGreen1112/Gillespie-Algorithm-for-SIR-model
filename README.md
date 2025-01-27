@@ -55,17 +55,17 @@ P(t_1 > \Delta t, t_2 > \Delta t, ...)
 \end{align}
 $$
 
-So the PDF that something \textit{does} happens in $\Delta t$ is an exponential:
+So the PDF that something _does_ happens in $\Delta t$ is an exponential:
 
 $$
 \begin{align}
 \frac{d}{dt}(1-P(t_1 > \Delta t, t_2 > \Delta t, ...)) 
-&= -\sum_{i = 1} ^ {n} -\lambda_i e^{-\sum_{i = 1} ^ {n} -\lambda_i \Delta t}
+&= \sum_{i = 1} ^ {n} \lambda_i e^{-\sum_{i = 1} ^ {n} -\lambda_i \Delta t}
 \end{align}
 $$
 
 Now we know how long it takes for something to happens. But which event is happened? 
-We could choose one event based on their \textit{propensity}, meaning the probability who is turned is 
+We could choose one event based on their _propensity_, meaning the probability who is turned is 
 
 $$ \frac{\lambda_j} {\sum_{i = 1} ^ {n} \lambda_i} $$
 
@@ -81,18 +81,20 @@ $$\frac{\sum_{i = 1} ^ {r - 1} \lambda_i}{\sum_{i = 1} ^ {n} \lambda_i} < u < \f
 
 then pick up the rth individual and update its state change: 
 
--If S \rightarrow I happens, then $S(t + \Delta t) = S(t) - 1$ and $I(t + \Delta t) = I(t) + 1$
--If I \rightarrow R happens, then $I(t + \Delta t) = I(t) - 1$ and $R(t + \Delta t) = R(t) + 1$
+-If S &rarr I happens, then $S(t + \Delta t) = S(t) - 1$ and $I(t + \Delta t) = I(t) + 1$
+-If I &rarr R happens, then $I(t + \Delta t) = I(t) - 1$ and $R(t + \Delta t) = R(t) + 1$
 
 ## SIR model solving using ODE
 Alternatively, we could solve this by constructing an ODE in a deterministic way:
 
-$$\begin{array}{l}
-\frac{dS(t)}{dt} = -\beta S(t)\frac{I(t)}{N} \\
-\frac{dI(t)}{dt} = \beta S(t)\frac{I(t)}{N} - \gamma I(t)\\
-\frac{dR(t)}{dt} = \gamma I(t)\\
-\end{array}
 $$
+\begin{cases}
+\frac{dS(t)}{dt} = -\beta S(t)\frac{I(t)}{N} \\
+\frac{dI(t)}{dt} = \beta S(t)\frac{I(t)}{N} - \gamma I(t) \\
+\frac{dR(t)}{dt} = \gamma I(t)
+\end{cases}
+$$
+
 
 where all the listed parameters are constant. 
 
@@ -115,7 +117,7 @@ The only tricky part is how many events happened in a time interval. Does it sou
 
 ## Hybrid method 
 This method just combines the ODE method and Gillespie algorithm for large N. 
-Say N is $10^5$, and I(t) is $10^4$ at time t. Hence $\lambda (t) \rightarrow \infty$, indicating that $\Delta t \rightarrow 0$. Thereforee the simulation becomes rather slow. We could solve it by:
+Say N is $10^5$, and I(t) is $10^4$ at time t. Hence $\lambda (t) \rightarrow \infty$, indicating that $\Delta t \rightarrow 0$. Therefore the simulation becomes rather slow. We could solve it by:
 
 -When $I(t) <= I^*$, we use the Gillespie algorithm. 
 
